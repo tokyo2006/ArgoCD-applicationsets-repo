@@ -6,20 +6,14 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - matrix:
-        generators:
-          - list:
-              elements:
-              - environment: sandbox-cn
-                server: https://kubernetes.default.svc
-          - git:
-            repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
-            revision: HEAD
-            directories:
-              - path: 'services/guest-book/**/config.json'
+    - git:
+      repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
+      revision: HEAD
+      directories:
+        - path: 'services/guest-book/**/config.json'
   template:
     metadata:
-      name: 'guestbook'
+      name: {{ .path.basename }}-guestbook
     spec:
       project: stack
       syncPolicy:
@@ -33,7 +27,7 @@ spec:
         path: {{ .helm_path}}
         helm:
           valueFiles:
-          - {{ .values_path }}/{{ .environment }}/guest-book.yaml
+          - {{ .values_path }}/{{ .path.basename }}/guest-book.yaml
           releaseName: 'guestbook'
           valuesObject:
             image:
@@ -61,5 +55,5 @@ spec:
                   topologyKey: kubernetes.io/hostname
 
       destination:
-        server: '{{.server}}'
+        server: '{{.cluster_server}}'
         namespace: 'default'
