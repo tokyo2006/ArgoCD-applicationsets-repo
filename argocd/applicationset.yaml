@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: services-applications
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
         repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo'
@@ -11,13 +13,13 @@ spec:
           - path: 'argocd/services/*'
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{ .path.basename }}'
     spec:
       project: platform
       source:
         repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo'
         targetRevision: HEAD
-        path: '{{path}}'
+        path: '{{ .path }}'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: 'argocd'
