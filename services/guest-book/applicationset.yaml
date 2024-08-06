@@ -7,10 +7,10 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
+      repoURL: https://github.com/tokyo2006/service-config-repo.git
       revision: HEAD
       files:
-      - path: 'services/guest-book/**/config.json'
+      - path: "services/guest-book/**/config.json"
   template:
     metadata:
       name: 'sandbox-cn-guestbook'
@@ -27,7 +27,7 @@ spec:
         path: {{.helm_path}}
         helm:
           valueFiles:
-          - '{{ .values_path }}/sandbox-cn/guest-book.yaml'
+          - '{{.values_path}}/sandbox-cn/guest-book.yaml'
           releaseName: 'guestbook'
           valuesObject:
             image:
