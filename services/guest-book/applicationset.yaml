@@ -10,8 +10,8 @@ spec:
         generators:
           - list:
               elements:
-                - environment: sandbox-cn
-                  server: https://kubernetes.default.svc
+              - environment: sandbox-cn
+                server: https://kubernetes.default.svc
           - git:
             repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
             revision: HEAD
