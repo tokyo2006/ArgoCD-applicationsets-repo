@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters: {}
+  template:
+    metadata:
+      name: '{{.name}}-guestbook'
+    spec:
+      project: stack
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+      source:
+        repoURL: https://github.com/tokyo2006/argocd-example-apps
+        targetRevision: HEAD
+        path: helm-guestbook
+        helm:
+          valueFiles:
+          - values.yaml
+          releaseName: '{{.name}}-guestbook'
+          valuesObject:
+            annotations:
+              team: platform-ops
+              repository: https://github.com/Tradeshift/argocd-example-apps
+            resources:
+              requests:
+                cpu: 100m
+                memory: 100Mi
+              limits:
+                cpu: 100m
+                memory: 100Mi
+            affinity:
+              podAntiAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - guestbook
+                  topologyKey: kubernetes.io/hostname
+
+      destination:
+        server: '{{.server}}'
+        namespace: 'default'

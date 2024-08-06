@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: services-applications
+spec:
+  generators:
+    - git:
+        repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo'
+        revision: HEAD
+        directories:
+          - path: 'argocd/services/*'
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: platform
+      source:
+        repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo'
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: 'argocd'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
