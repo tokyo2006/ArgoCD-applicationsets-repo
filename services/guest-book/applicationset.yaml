@@ -9,7 +9,7 @@ spec:
   - git:
       repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
       revision: HEAD
-      directories:
+      files:
       - path: 'services/guest-book/**/config.json'
   template:
     metadata:
