@@ -6,10 +6,20 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - clusters: {}
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - environment: sandbox-cn
+                  server: https://kubernetes.default.svc
+          - git:
+            repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
+            revision: HEAD
+            directories:
+              - path: 'services/*'
   template:
     metadata:
-      name: '{{.name}}-guestbook'
+      name: 'guestbook'
     spec:
       project: stack
       syncPolicy:
@@ -18,14 +28,17 @@ spec:
         syncOptions:
         - CreateNamespace=true
       source:
-        repoURL: https://github.com/tokyo2006/argocd-example-apps.git
+        repoURL: https://github.com/tokyo2006/{{ .helm_repo }}.git
         targetRevision: HEAD
-        path: helm-guestbook
+        path: {{ .helm_path}}
         helm:
           valueFiles:
-          - values.yaml
-          releaseName: '{{.name}}-guestbook'
+          - {{ .values_path }}/{{ .environment }}/guest-book.yaml
+          releaseName: 'guestbook'
           valuesObject:
+            image:
+              repository: 120867251111.dkr.ecr.cn-northwest-1.amazonaws.com.cn/tradeshift-base/ks-guestbook-demo
+              tag: {{ .image_tag }}
             annotations:
               team: platform-ops
               repository: https://github.com/Tradeshift/argocd-example-apps.git
