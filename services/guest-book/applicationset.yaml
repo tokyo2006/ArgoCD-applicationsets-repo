@@ -7,7 +7,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/tokyo2006/service-config-repo.git
+      repoURL: https://github.com/tokyo2006/services-configuration-repo.git
       revision: HEAD
       files:
       - path: "services/guest-book/**/config.json"
