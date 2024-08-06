@@ -41,7 +41,7 @@ spec:
               tag: {{ .image_tag }}
             annotations:
               team: platform-ops
-              repository: https://github.com/Tradeshift/argocd-example-apps.git
+              repository: https://github.com/Tradeshift/argocd-example-apps
             resources:
               requests:
                 cpu: 100m
