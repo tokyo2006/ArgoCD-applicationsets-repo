@@ -6,11 +6,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - git:
-        repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo.git'
-        revision: HEAD
-        directories:
-          - path: 'services/*'
+  - git:
+      repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo.git'
+      revision: HEAD
+      directories:
+      - path: 'services/*'
   template:
     metadata:
       name: '{{ .path.basename }}-applicationset'
