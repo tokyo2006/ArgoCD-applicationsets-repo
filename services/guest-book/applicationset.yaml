@@ -18,7 +18,7 @@ spec:
         syncOptions:
         - CreateNamespace=true
       source:
-        repoURL: https://github.com/tokyo2006/argocd-example-apps
+        repoURL: https://github.com/tokyo2006/argocd-example-apps.git
         targetRevision: HEAD
         path: helm-guestbook
         helm:
@@ -28,7 +28,7 @@ spec:
           valuesObject:
             annotations:
               team: platform-ops
-              repository: https://github.com/Tradeshift/argocd-example-apps
+              repository: https://github.com/Tradeshift/argocd-example-apps.git
             resources:
               requests:
                 cpu: 100m

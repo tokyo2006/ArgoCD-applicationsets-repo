@@ -17,7 +17,7 @@ spec:
     spec:
       project: platform
       source:
-        repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo'
+        repoURL: 'https://github.com/tokyo2006/ArgoCD-applicationsets-repo.git'
         targetRevision: HEAD
         path: '{{ .path }}'
       destination:
