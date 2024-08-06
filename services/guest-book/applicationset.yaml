@@ -16,7 +16,7 @@ spec:
             repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
             revision: HEAD
             directories:
-              - path: 'services/*'
+              - path: 'services/guest-book/**/config.json'
   template:
     metadata:
       name: 'guestbook'
