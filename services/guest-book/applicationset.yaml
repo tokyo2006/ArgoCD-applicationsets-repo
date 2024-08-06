@@ -13,7 +13,7 @@ spec:
     - path: 'services/guest-book/**/config.json'
   template:
     metadata:
-      name: '{{ .path.basename }}-guestbook'
+      name: 'sandbox-cn-guestbook'
     spec:
       project: stack
       syncPolicy:
@@ -27,7 +27,7 @@ spec:
         path: {{ .helm_path}}
         helm:
           valueFiles:
-          - '{{ .values_path }}/{{ .path.basename }}/guest-book.yaml'
+          - '{{ .values_path }}/sandbox-cn/guest-book.yaml'
           releaseName: 'guestbook'
           valuesObject:
             image:
@@ -53,7 +53,6 @@ spec:
                       values:
                       - guestbook
                   topologyKey: kubernetes.io/hostname
-
       destination:
         server: '{{.cluster_server}}'
         namespace: 'default'
