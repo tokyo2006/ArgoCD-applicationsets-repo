@@ -13,7 +13,7 @@ spec:
     - path: 'services/guest-book/**/config.json'
   template:
     metadata:
-      name: {{ .path.basename }}-guestbook
+      name: '{{ .path.basename }}-guestbook'
     spec:
       project: stack
       syncPolicy:
@@ -22,12 +22,12 @@ spec:
         syncOptions:
         - CreateNamespace=true
       source:
-        repoURL: https://github.com/tokyo2006/{{ .helm_repo }}.git
+        repoURL: 'https://github.com/tokyo2006/{{ .helm_repo }}.git'
         targetRevision: HEAD
         path: {{ .helm_path}}
         helm:
           valueFiles:
-          - {{ .values_path }}/{{ .path.basename }}/guest-book.yaml
+          - '{{ .values_path }}/{{ .path.basename }}/guest-book.yaml'
           releaseName: 'guestbook'
           valuesObject:
             image:
