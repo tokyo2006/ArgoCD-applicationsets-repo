@@ -6,11 +6,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - git:
-      repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
-      revision: HEAD
-      directories:
-        - path: 'services/guest-book/**/config.json'
+  - git:
+    repoURL: 'https://github.com/tokyo2006/service-config-repo.git'
+    revision: HEAD
+    directories:
+    - path: 'services/guest-book/**/config.json'
   template:
     metadata:
       name: {{ .path.basename }}-guestbook
